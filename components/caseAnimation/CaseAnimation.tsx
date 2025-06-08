@@ -6,6 +6,8 @@ import { Swiper as SwiperType } from 'swiper/types';
 import 'swiper/css';
 import ItemImage from '../itemImage/ItemImage';
 import { IItem } from '@/types/types';
+import { useDispatch } from 'react-redux';
+import { updateCoins, updateInventory } from '@/store/userSlice';
 
 interface Props {
     itemsArray: IItem[],
@@ -14,7 +16,7 @@ interface Props {
 
 const CaseAnimation = ({ itemsArray, setIsOpen }: Props) => {
 
-
+    const dispatch = useDispatch()
     const swiperRef = useRef<SwiperType | null>(null);
 
     const onSwiper = (swiper: SwiperType) => {
@@ -27,6 +29,12 @@ const CaseAnimation = ({ itemsArray, setIsOpen }: Props) => {
     }
 
     const tranSitionEnd = () => {
+        fetch('/api/users')
+            .then(resp => resp.json())
+            .then(json => {
+                dispatch(updateCoins(json.user1.coins))
+                dispatch(updateInventory(json.user1.inventory))
+            })
         setTimeout(() => setIsOpen(false), 1500)
     }
 

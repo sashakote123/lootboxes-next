@@ -7,6 +7,7 @@ import SFProDisplay from "./fonts";
 
 import './global.css'
 import Header from "@/components/header/Header";
+import ReduxProvider from "@/providers/ReduxProvider";
 
 
 const geistSans = Geist({
@@ -34,9 +35,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={SFProDisplay.semibold.className}>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Header />
-        {children}
-        <Navigation />
+        <ReduxProvider>
+          <Header />
+          {children}
+          <Navigation />
+        </ReduxProvider>
       </body>
     </html>
   );

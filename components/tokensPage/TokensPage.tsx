@@ -1,16 +1,23 @@
+'use client'
+
 import styles from './styles.module.css'
 import fire from './../../sources/images/coins/Coin.png'
 import Image from 'next/image';
 import Link from 'next/link';
 import cart from './../../sources/images/coins/shopping-cart.svg'
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
 
 const TokensPage = () => {
+
+    const user = useSelector((state: RootState) => state.user)
+
     return (
         <div className={styles.container}>
             <section className={styles.tokensPage}>
                 <Image className={styles.image} src={fire} alt='fire' />
                 <h1 className={styles.pageTitle}>
-                    <div className={styles.titleValue}>150000</div>
+                    <div className={styles.titleValue}>{user.coins}</div>
                     <div className={styles.titleText}>токенов</div>
 
                 </h1>

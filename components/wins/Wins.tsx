@@ -3,20 +3,16 @@ import styles from './styles.module.css'
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import { useEffect, useState } from 'react'
-import { IItem, IUres } from '@/types/types'
+import { IItem } from '@/types/types'
 import ItemImage from '../itemImage/ItemImage'
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
 
 
 const Wins = () => {
 
-    const [data, setData] = useState<IUres>()
+    const user = useSelector((state: RootState) => state.user)
 
-    useEffect(() => {
-        fetch(`/api/users`)
-            .then(resp => resp.json())
-            .then(json => { setData(json.user1) })
-    }, [])
 
 
     return (
@@ -27,11 +23,11 @@ const Wins = () => {
                 className={styles.winsList}
                 slidesPerView={4}
                 loop={false}>
-                {data?.inventory.map((item: IItem, index: number) => {
+                {user.inventory.map((item: IItem, index: number) => {
                     return <SwiperSlide key={index} className={styles.winsListItem}>
-                        <ItemImage item={item}/>
+                        <ItemImage item={item} />
                     </SwiperSlide>
-                })}
+                }).reverse()}
             </Swiper>
 
         </section>

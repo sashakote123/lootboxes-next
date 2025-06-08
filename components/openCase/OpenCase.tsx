@@ -40,7 +40,7 @@ const OpenCase: React.FC<Props> = ({ boxId }) => {
 
 
     useEffect(() => {
-        fetch(`/api/box/${boxId}`)
+        fetch(`/open/api/box/${boxId}`)
             .then(res => res.json())
             .then(data => { setData(data) })
     }, [boxId]);
@@ -60,7 +60,7 @@ const OpenCase: React.FC<Props> = ({ boxId }) => {
         }).then(resp => resp.json()).then(json => { setWinningItem(json.item)})
 
 
-        fetch(`/api/box/${boxId}`)
+        fetch(`/open/api/box/${boxId}`)
             .then(resp => resp.json())
             .then(json => {
                 const resArr = []

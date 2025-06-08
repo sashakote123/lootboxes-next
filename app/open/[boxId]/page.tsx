@@ -1,14 +1,24 @@
 import OpenCase from '@/components/openCase/OpenCase';
+import { Suspense } from 'react';
 
 interface Props {
-  params: {
+  params: Promise<{
     boxId: string;
-  };
+  }>;
 }
 
-const page = ({ params }: Props) => {
-    return (
-        <OpenCase boxId={params.boxId}/>
-    );
+// Компонент-обертка для асинхронной загрузки
+async function CaseLoader({ boxId }: { boxId: string }) {
+  return <OpenCase boxId={boxId} />;
 }
-export default page;
+
+export default async function Page(props: Props) {
+  const params = await props.params;
+  return (
+    <Suspense fallback={<div>Loading case...</div>}>
+      <CaseLoader boxId={params.boxId} />
+    </Suspense>
+  );
+}
+
+export const dynamic = 'force-dynamic';

@@ -57,7 +57,7 @@ const OpenCase: React.FC<Props> = ({ boxId }) => {
                 userId: 'user1',
                 caseId: boxId,
             }),
-        }).then(resp => resp.json()).then(json => { setWinningItem(json.item)})
+        }).then(resp => resp.json()).then(json => { setWinningItem(json.item) })
 
 
         fetch(`/open/api/box/${boxId}`)
@@ -86,14 +86,18 @@ const OpenCase: React.FC<Props> = ({ boxId }) => {
         data ?
             <section className={styles.openCase}>
                 {isOpen && winningItem && itemsArray ?
-                    <CaseAnimation
-                        itemsArray={itemsArray}
-                        setIsOpen={setIsOpen}
-                    /> :
+                    <>
+                        <CaseAnimation
+                            itemsArray={itemsArray}
+                            setIsOpen={setIsOpen}
+                        />
+                        <div className={styles.wrapper}></div>
+                    </>
+                    :
                     <>
                         <div className={styles.casePicker}>
                             <Link href={`./box${getNewId(boxId, 4, false)}`} className={styles.arrowBtn}><Image src={right} alt='arrow' /></Link>
-                            <Image className={styles.img} width={186} height={186} src={data.img} alt='case' />
+                            <Image quality={100} unoptimized={true} className={styles.img} width={186} height={186} src={data.img} alt='case' />
                             <Link href={`./box${getNewId(boxId, 4, true)}`} className={styles.arrowBtn}><Image src={left} alt='arrow' /></Link>
                         </div>
                         <div className={styles.openBtns}>

@@ -1,11 +1,14 @@
 .animation {
+    position: fixed;
     width: 506px;
     height: 186px;
 
     margin: 50px 0;
 
-    position: relative;
+    /* position: relative; */
 }
+
+
 
 .wrapper::before {
     content: "";

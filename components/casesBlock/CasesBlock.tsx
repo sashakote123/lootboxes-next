@@ -30,7 +30,7 @@ const CasesBlock: React.FC<Props> = ({ casesArray }) => {
             {casesArray.map((item: ICases, index: number) => {
                 return <SwiperSlide key={index} className={styles.winsListItem}>
                     <div className={styles.image}>
-                        <Image priority={false} width={120} height={120} src={item.img} alt='img' />
+                        <Image quality={100} unoptimized={true} priority={false} width={120} height={120} src={item.img} alt='img' />
                     </div>
                     <div className={styles.bottom}>
                         <h3 className={styles.title}>{item.name}</h3>

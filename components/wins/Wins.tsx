@@ -21,7 +21,7 @@ const Wins = () => {
 
     return (
         <section className={styles.wins}>
-            <h2 className={styles.winsTitle}>Крайние выигрыши</h2>
+            <h2 className={styles.winsTitle}>Последние выигрыши</h2>
 
             <Swiper
                 className={styles.winsList}

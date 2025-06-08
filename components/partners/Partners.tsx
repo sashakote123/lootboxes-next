@@ -18,7 +18,7 @@ const Partners = () => {
                 <Image src={tg} alt='tg' />
             </Link>
 
-            <Image className={styles.bgImage} src={bg} alt='bg' />
+            <Image quality={100} unoptimized={true} className={styles.bgImage} src={bg} alt='bg' />
         </section>
     );
 }

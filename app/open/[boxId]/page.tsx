@@ -7,7 +7,6 @@ interface Props {
   }>;
 }
 
-// Компонент-обертка для асинхронной загрузки
 async function CaseLoader({ boxId }: { boxId: string }) {
   return <OpenCase boxId={boxId} />;
 }

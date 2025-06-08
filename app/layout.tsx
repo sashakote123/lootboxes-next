@@ -1,3 +1,5 @@
+
+
 import Navigation from "@/components/Navigation/Navigation";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -5,6 +7,7 @@ import SFProDisplay from "./fonts";
 
 import './global.css'
 import Header from "@/components/header/Header";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,6 +29,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+
   return (
     <html lang="en" className={SFProDisplay.semibold.className}>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>

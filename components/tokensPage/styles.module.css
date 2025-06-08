@@ -1,0 +1,96 @@
+
+
+.image {
+
+}
+
+.tokensPage {
+    width: 353px;
+    margin: 0 auto;
+
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pageTitle {
+    font-weight: 600;
+    font-size: 14px;
+    font-variant: all-small-caps;
+
+    margin-bottom: 40px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.titleText {
+    border-radius: 0 0 12px 12px;
+    padding: 12px;
+    width: 80px;
+    height: 34px;
+    background: rgba(255, 255, 255, 0.1);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.titleValue {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 32px;
+    letter-spacing: -0.02em;
+    text-align: center;
+
+    border-radius: 16px;
+    padding: 10px 20px;
+    width: 162px;
+    height: 64px;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.description {
+    margin-bottom: 42px;
+}
+
+.descTitle {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 150%;
+    font-variant: all-small-caps;
+
+    margin-bottom: 14px;
+}
+
+.descText {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 114%;
+    opacity: 0.8;
+}
+
+.buyBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    border-radius: 12px;
+    padding: 8px 20px;
+    width: 353px;
+    height: 54px;
+
+    background-color: #47deff;
+
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: -0.02em;
+    font-variant: all-small-caps;
+    text-align: center;
+    color: #0e1526;
+}

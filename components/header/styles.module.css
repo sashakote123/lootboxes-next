@@ -1,0 +1,57 @@
+.header {
+    padding-top: 30px;
+    max-width: 353px;
+    margin: 0 auto 36px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.coins {
+    border-radius: 12px;
+    padding: 8px 16px 8px 12px;
+    width: 115px;
+    height: 46px;
+
+    backdrop-filter: blur(100px);
+    background: rgba(255, 255, 255, 0.1);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+}
+
+.text {
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: -0.02em;
+    text-align: center;
+
+    color: white;
+}
+
+.inventory {
+    border-radius: 12px;
+    padding: 8px 16px;
+    width: 144px;
+    height: 46px;
+
+    backdrop-filter: blur(100px);
+    background: rgba(255, 255, 255, 0.1);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+}
+
+.inventoryValue {
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: -0.02em;
+    text-align: center;
+
+    color: white;
+
+    opacity: 0.65;
+}

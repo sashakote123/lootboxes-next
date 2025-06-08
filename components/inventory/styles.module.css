@@ -1,0 +1,14 @@
+.inventoryTitle {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 150%;
+    font-variant: all-small-caps;
+
+    margin-bottom: 21px;
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+

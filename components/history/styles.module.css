@@ -1,0 +1,128 @@
+.history{
+    margin-bottom: 28px;
+}
+
+.historuTitle {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 150%;
+    font-variant: all-small-caps;
+
+    margin-bottom: 21px;
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.historyList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    height: 288px;
+    overflow-y: scroll;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.historyContainer {
+    position: relative;
+    height: 288px;
+}
+
+.historyList::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, rgba(14, 21, 38, 0) 0%, rgba(14, 21, 38, 1) 100%);
+    pointer-events: none;
+}
+
+.historyItem {
+    border-radius: 20px;
+    padding: 12px;
+    width: 353px;
+    height: 88px;
+
+    backdrop-filter: blur(100px);
+    background: rgba(255, 255, 255, 0.1);
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: space-between;
+}
+
+.historyItem img {
+    width: 64px;
+}
+
+.button {
+    font-size: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #72d769;
+    border-radius: 10px;
+    padding: 6px 17px;
+    width: 46px;
+    height: 46px;
+}
+
+.button:hover {
+    backdrop-filter: blur(85.1851806640625px);
+}
+
+.itemInfo {
+    width: 195px;
+}
+
+.infoTitle {
+    font-weight: 600;
+    font-size: 14px;
+    font-variant: all-small-caps;
+
+    margin-bottom: 12px;
+}
+
+.dates {
+    display: flex;
+    gap: 6px;
+
+    font-weight: 700;
+    font-size: 12px;
+    font-variant: all-small-caps;
+    text-align: center;
+}
+
+.date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 6px;
+    padding: 6px 8px;
+    width: 61px;
+    height: 24px;
+    backdrop-filter: blur(100px);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.time {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    padding: 6px 8px;
+    width: 45px;
+    height: 24px;
+}

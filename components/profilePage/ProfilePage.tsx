@@ -21,6 +21,7 @@ const ProfilePage = () => {
 
         if (isTMA()) {
             const initDataRaw = retrieveRawInitData();
+            console.log(initDataRaw);
             fetch('/api/protected', {
                 method: 'GET',
                 headers: {

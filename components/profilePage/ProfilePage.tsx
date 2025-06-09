@@ -7,10 +7,11 @@ import UserCard from '../userCard/UserCard';
 import styles from './styles.module.css'
 import { IUres } from '@/types/types';
 
+
 const ProfilePage = () => {
 
     const [data, setData] = useState<IUres>()
-    const [data2, setData2] = useState<any>()
+    const [data2, setData2] = useState<{userId: string}>()
 
     useEffect(() => {
         fetch(`/api/users`)

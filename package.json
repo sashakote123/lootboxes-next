@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
+    "@telegram-apps/init-data-node": "^2.0.8",
+    "@telegram-apps/sdk": "^3.10.1",
     "@telegram-apps/sdk-react": "^3.3.1",
     "@twa-dev/sdk": "^8.0.2",
     "firebase": "^11.9.0",

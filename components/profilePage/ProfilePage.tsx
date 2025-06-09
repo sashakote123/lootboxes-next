@@ -6,22 +6,30 @@ import Inventory from '../inventory/Inventory';
 import UserCard from '../userCard/UserCard';
 import styles from './styles.module.css'
 import { IUres } from '@/types/types';
+import { isTMA, retrieveRawInitData } from '@telegram-apps/sdk';
 
 
 const ProfilePage = () => {
 
     const [data, setData] = useState<IUres>()
-    const [data2, setData2] = useState<{userId: string}>()
+    const [data2, setData2] = useState<{ userId: string }>()
 
     useEffect(() => {
         fetch(`/api/users`)
             .then(resp => resp.json())
             .then(json => { setData(json.user1) })
 
-
-        fetch(`/api/protected`)
-            .then(resp => resp.json())
-            .then(json => { setData2(json) })
+        if (isTMA()) {
+            const initDataRaw = retrieveRawInitData();
+            fetch('/api/protected', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `tma ${initDataRaw}`
+                }
+            })
+                .then(resp => resp.json())
+                .then(json => { setData2(json) })
+        }
     }, [])
 
 

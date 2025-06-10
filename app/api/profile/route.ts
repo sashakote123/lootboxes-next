@@ -2,17 +2,17 @@ import { db } from '@/lib/firebase';
 import { ref, get, update } from "firebase/database";
 import { NextResponse } from 'next/server';
 
-interface IUser {
-    id: number
-}
+// interface IUser {
+//     id: number
+// }
 
 export async function POST(request: Request) {
     try {
         const { userData } = await request.json();
-        const usersSnapshot = await get(ref(db, `users`));
-        const usersData: IUser = usersSnapshot.val();
+        const usersSnapshot = await get(ref(db, `users/user${userData.id}`));
+        //const usersData: IUser = usersSnapshot.val();
 
-        if (!Object.values(usersData).some((user: IUser) => user.id === userData.id)) {
+        if (!usersSnapshot.exists()) {
             await update(ref(db, `users/user${userData.id}`), {
                 id: userData.id,
                 name: userData.first_name,
@@ -23,6 +23,7 @@ export async function POST(request: Request) {
                 history: []
             });
         }
+
         const userSnapshot = await get(ref(db, `users/user${userData.id}`));
 
         return NextResponse.json({

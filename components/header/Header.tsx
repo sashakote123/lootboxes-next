@@ -37,18 +37,24 @@ const Header = () => {
                 body: JSON.stringify({
                     userData: launchParams.tgWebAppData?.user,
                 })
+            }).then(resp => resp.json()).then(json => {
+                dispatch(updateCoins(json.item.coins));
+                if (json.item.inventory) {
+                    dispatch(updateInventory(json.item?.inventory))
+                    dispatch(updateHistory(json.item?.history))
+                }
             })
 
-            if (user.coins === -1)
-                fetch(`/api/users/user${launchParams.tgWebAppData?.user?.id}`)
-                    .then(resp => resp.json())
-                    .then(json => {
-                        dispatch(updateCoins(json.coins));
-                        if (json.inventory) {
-                            dispatch(updateInventory(json?.inventory))
-                            dispatch(updateHistory(json?.history))
-                        }
-                    })
+            // if (user.coins === -1)
+            //     fetch(`/api/users/user${launchParams.tgWebAppData?.user?.id}`)
+            //         .then(resp => resp.json())
+            //         .then(json => {
+            //             dispatch(updateCoins(json.coins));
+            //             if (json.inventory) {
+            //                 dispatch(updateInventory(json?.inventory))
+            //                 dispatch(updateHistory(json?.history))
+            //             }
+            //         })
         }
 
 

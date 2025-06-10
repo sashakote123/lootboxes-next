@@ -9,7 +9,8 @@ import { NextResponse } from 'next/server';
 export async function POST(request: Request) {
     try {
         const { userData } = await request.json();
-        const userRef = ref(db, `users/user${userData.id}`);
+        //const userRef = ref(db, `users/user${userData.id}`);
+        const userRef = ref(db, `users/user12345678`);
         const snapshot = await get(userRef);
 
         if (!snapshot.exists()) {

@@ -23,11 +23,11 @@ const Wins = () => {
                 className={styles.winsList}
                 slidesPerView={4}
                 loop={false}>
-                {user.inventory.map((item: IItem, index: number) => {
+                {user.inventory ? user.inventory.map((item: IItem, index: number) => {
                     return <SwiperSlide key={index} className={styles.winsListItem}>
                         <ItemImage item={item} />
                     </SwiperSlide>
-                }).reverse()}
+                }).reverse(): <>no items yet</>}
             </Swiper>
 
         </section>

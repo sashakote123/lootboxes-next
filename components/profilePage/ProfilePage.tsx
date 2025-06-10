@@ -40,7 +40,7 @@ const ProfilePage = () => {
     return (
         data ?
             <section className={styles.profilePage}>
-                <UserCard name={`${data.name} ${data.lastname}`} id={data.id} />
+                <UserCard name={`${data.name} ${data?.lastname}`} id={data.id} />
                 <History historyArray={data?.history} />
                 <Inventory array={data?.inventory} />
             </section>

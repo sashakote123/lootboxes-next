@@ -33,7 +33,7 @@ export default function RootLayout({
 
 
   return (
-    <html lang="en" className={SFProDisplay.semibold.className}>
+    <html lang="en" className={SFProDisplay.semibold.className} >
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <ReduxProvider>
           <Header />
@@ -41,6 +41,6 @@ export default function RootLayout({
           <Navigation />
         </ReduxProvider>
       </body>
-    </html>
+    </html >
   );
 }

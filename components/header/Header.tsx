@@ -20,6 +20,18 @@ const Header = () => {
 
     useEffect(() => {
         const launchParams = isTMA() ? retrieveLaunchParams() : mockLaunchParams
+
+        fetch('/api/profile', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                userData: launchParams.tgWebAppData?.user,
+            })
+        })
+
+
         if (user.coins === -1)
             fetch(`/api/users/user${launchParams.tgWebAppData?.user?.id}`)
                 .then(resp => resp.json())

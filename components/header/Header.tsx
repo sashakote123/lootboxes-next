@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import { updateCoins, updateHistory, updateInventory } from '@/store/userSlice';
-// import { isTMA, retrieveLaunchParams } from '@telegram-apps/sdk';
+import { isTMA, retrieveLaunchParams } from '@telegram-apps/sdk';
 import { mockLaunchParams } from '@/mock/launchParams';
 import { updateParams } from '@/store/launchParamsSlice';
 import { ILaunchParams } from '@/types/types';
@@ -22,7 +22,8 @@ const Header = () => {
     const params = useSelector((state: RootState) => state.params)
     useEffect(() => {
         if (!params.tgWebAppData.user.id) {
-            const launchParams = mockLaunchParams;
+            //const launchParams = mockLaunchParams;
+            const launchParams = isTMA() ? retrieveLaunchParams() : mockLaunchParams
             dispatch(updateParams(launchParams as ILaunchParams));
 
             // Добавьте проверку, чтобы не делать запрос при каждом изменении coins

@@ -31,7 +31,7 @@ const CaseAnimation = ({ itemsArray, setIsOpen }: Props) => {
     }
 
     const tranSitionEnd = () => {
-        fetch(`/api/users/user${params.tgWebAppData?.user?.id}`)
+        fetch(`/api/user/user${params.tgWebAppData?.user?.id}`)
             .then(resp => resp.json())
             .then(json => {
                 dispatch(updateCoins(json.coins))

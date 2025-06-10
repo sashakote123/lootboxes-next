@@ -16,7 +16,7 @@ const ProfilePage = () => {
     const params = useSelector((state: RootState) => state.params)
     useEffect(() => {
 
-        fetch(`/api/users/user${params.tgWebAppData?.user?.id}`)
+        fetch(`/api/user/user${params.tgWebAppData?.user?.id}`)
             .then(resp => resp.json())
             .then(json => { setData(json); console.log(json) })
 

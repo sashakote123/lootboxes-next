@@ -24,9 +24,9 @@ const Header = () => {
 
         console.log('useeffect');
         if (!params.tgWebAppData.user.id) {
-             console.log('get params');
-            const launchParams = isTMA() ? retrieveLaunchParams() : mockLaunchParams
-
+            console.log('get params');
+            //const launchParams = isTMA() ? retrieveLaunchParams() : mockLaunchParams
+            const launchParams = mockLaunchParams
             dispatch(updateParams(launchParams as ILaunchParams))
 
             fetch('/api/profile', {

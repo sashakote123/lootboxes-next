@@ -10,7 +10,7 @@ export enum rarities {
 
 export interface IUres {
     name: string,
-    lastname: string,
+    lastname?: string,
     id: number,
     inventory: IItem[],
     coins: number,

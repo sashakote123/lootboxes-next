@@ -4,6 +4,7 @@ import { IHistoryItem, IItem, IUres } from '@/types/types';
 
 const initialState: IUres = {
     name: '',
+    lastname: '',
     id: 0,
     inventory: [],
     coins: -1,

@@ -18,6 +18,8 @@ import { getNewId, getRandomItem } from '@/methods/methods';
 import 'swiper/css';
 
 import CaseAnimation from '../caseAnimation/CaseAnimation';
+import { isTMA, retrieveLaunchParams } from '@telegram-apps/sdk';
+import { mockLaunchParams } from '@/mock/launchParams';
 
 interface Props {
     boxId: string;
@@ -47,14 +49,14 @@ const OpenCase: React.FC<Props> = ({ boxId }) => {
 
 
     const handleOpenCase = () => {
-
+        const launchParams = isTMA() ? retrieveLaunchParams() : mockLaunchParams
         fetch('/api/open-case', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                userId: 'user1',
+                userId: `user${launchParams.tgWebAppData?.user?.id}`,
                 caseId: boxId,
             }),
         }).then(resp => resp.json()).then(json => { setWinningItem(json.item) })

@@ -6,42 +6,41 @@ import Inventory from '../inventory/Inventory';
 import UserCard from '../userCard/UserCard';
 import styles from './styles.module.css'
 import { IUres } from '@/types/types';
-import { isTMA, retrieveLaunchParams, retrieveRawInitData } from '@telegram-apps/sdk';
+import { isTMA, retrieveLaunchParams } from '@telegram-apps/sdk';
+import { mockLaunchParams } from '@/mock/launchParams';
 
 
 const ProfilePage = () => {
 
     const [data, setData] = useState<IUres>()
-    const [data2, setData2] = useState<{ userId: string }>()
 
     useEffect(() => {
-        fetch(`/api/users`)
-            .then(resp => resp.json())
-            .then(json => { setData(json.user1) })
+        const launchParams = isTMA() ? retrieveLaunchParams() : mockLaunchParams
 
-        if (isTMA()) {
-            const initDataRaw = retrieveRawInitData();
-            const launchParams = retrieveLaunchParams()
-            console.log(initDataRaw);
-            console.log(launchParams);
-            fetch('/api/protected', {
-                method: 'GET',
-                headers: {
-                    'Authorization': `tma ${initDataRaw}`
-                }
-            })
-                .then(resp => resp.json())
-                .then(json => { setData2(json) })
-        }
+        // fetch('/api/profile', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({
+        //         userData: launchParams.tgWebAppData?.user,
+        //     })
+        // })
+
+
+        fetch(`/api/users/user${launchParams.tgWebAppData?.user?.id}`)
+            .then(resp => resp.json())
+            .then(json => { setData(json); console.log(json) })
+
     }, [])
+
 
 
 
     return (
         data ?
             <section className={styles.profilePage}>
-                {data2 ? <div>{data2.userId}</div> : null}
-                <UserCard name={data.name} id={data.id} />
+                <UserCard name={`${data.name} ${data.lastname}`} id={data.id} />
                 <History historyArray={data?.history} />
                 <Inventory array={data?.inventory} />
             </section>

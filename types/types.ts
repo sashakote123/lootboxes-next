@@ -8,8 +8,9 @@ export enum rarities {
     gold = 'gold',
 }
 
-export interface IUres{
+export interface IUres {
     name: string,
+    lastname: string,
     id: number,
     inventory: IItem[],
     coins: number,
@@ -34,4 +35,15 @@ export interface IOpnenCase {
 export interface IHistoryItem {
     item: IItem
     timestamp: Date,
+}
+
+export interface ILaunchParams {
+    tgWebAppData: {
+        user: {
+            first_name: string,
+            last_name: string,
+            photo_url: string,
+            id: number
+        }
+    }
 }

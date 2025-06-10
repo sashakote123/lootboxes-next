@@ -9,6 +9,8 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import { updateCoins, updateHistory, updateInventory } from '@/store/userSlice';
+import { isTMA, retrieveLaunchParams } from '@telegram-apps/sdk';
+import { mockLaunchParams } from '@/mock/launchParams';
 
 const Header = () => {
     //const [data, setData] = useState<IUres>()
@@ -17,13 +19,16 @@ const Header = () => {
     const user = useSelector((state: RootState) => state.user)
 
     useEffect(() => {
+        const launchParams = isTMA() ? retrieveLaunchParams() : mockLaunchParams
         if (user.coins === -1)
-            fetch(`/api/users`)
+            fetch(`/api/users/user${launchParams.tgWebAppData?.user?.id}`)
                 .then(resp => resp.json())
                 .then(json => {
-                    dispatch(updateCoins(json.user1.coins));
-                    dispatch(updateInventory(json.user1.inventory))
-                    dispatch(updateHistory(json.user1.history))
+                    dispatch(updateCoins(json.coins));
+                    if (json.inventory) {
+                        dispatch(updateInventory(json?.inventory))
+                        dispatch(updateHistory(json?.history))
+                    }
                 })
     }, [dispatch, user.coins])
 

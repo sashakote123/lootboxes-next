@@ -8,6 +8,8 @@ import ItemImage from '../itemImage/ItemImage';
 import { IItem } from '@/types/types';
 import { useDispatch } from 'react-redux';
 import { updateCoins, updateInventory } from '@/store/userSlice';
+import { isTMA, retrieveLaunchParams } from '@telegram-apps/sdk';
+import { mockLaunchParams } from '@/mock/launchParams';
 
 interface Props {
     itemsArray: IItem[],
@@ -15,7 +17,7 @@ interface Props {
 }
 
 const CaseAnimation = ({ itemsArray, setIsOpen }: Props) => {
-
+    const launchParams = isTMA() ? retrieveLaunchParams() : mockLaunchParams
     const dispatch = useDispatch()
     const swiperRef = useRef<SwiperType | null>(null);
 
@@ -29,11 +31,11 @@ const CaseAnimation = ({ itemsArray, setIsOpen }: Props) => {
     }
 
     const tranSitionEnd = () => {
-        fetch('/api/users')
+        fetch(`/api/users/user${launchParams.tgWebAppData?.user?.id}`)
             .then(resp => resp.json())
             .then(json => {
-                dispatch(updateCoins(json.user1.coins))
-                dispatch(updateInventory(json.user1.inventory))
+                dispatch(updateCoins(json.coins))
+                dispatch(updateInventory(json.inventory))
             })
         setTimeout(() => setIsOpen(false), 1500)
     }

@@ -11,11 +11,11 @@ interface Props {
 const GridInventory: React.FC<Props> = ({ array }) => {
     return (
         <ul className={styles.inventoryGrid}>
-            {array.map((item: IItem, index: number) => {
+            {array ? array.map((item: IItem, index: number) => {
                 return (<li key={index} className={styles.gridItem}>
-                    <ItemImage item={item}/>
+                    <ItemImage item={item} />
                 </li>)
-            })}
+            }) : <>no items yet</>}
         </ul>
     );
 }

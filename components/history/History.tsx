@@ -30,7 +30,7 @@ const History: React.FC<Props> = ({ historyArray }) => {
             </h2>
             <div className={styles.historyContainer}>
                 <ul className={styles.historyList}>
-                    {historyArray.map((item: IHistoryItem, index: number) => {
+                    {historyArray ? historyArray.map((item: IHistoryItem, index: number) => {
                         return (
 
                             <li key={index} className={styles.historyItem}>
@@ -48,7 +48,7 @@ const History: React.FC<Props> = ({ historyArray }) => {
                                 </button>
                             </li>
                         )
-                    }).reverse()}
+                    }).reverse() : <>no items yet</>}
                 </ul>
             </div>
 

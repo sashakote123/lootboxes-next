@@ -21,47 +21,28 @@ const Header = () => {
     const user = useSelector((state: RootState) => state.user)
     const params = useSelector((state: RootState) => state.params)
     useEffect(() => {
-
-        console.log('useeffect');
         if (!params.tgWebAppData.user.id) {
-            console.log('get params');
-            //const launchParams = isTMA() ? retrieveLaunchParams() : mockLaunchParams
-            const launchParams = mockLaunchParams
-            dispatch(updateParams(launchParams as ILaunchParams))
+            const launchParams = mockLaunchParams;
+            dispatch(updateParams(launchParams as ILaunchParams));
 
-            fetch('/api/profile', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    userData: launchParams.tgWebAppData?.user,
+            // Добавьте проверку, чтобы не делать запрос при каждом изменении coins
+            if (user.coins === -1) {
+                fetch('/api/profile', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userData: launchParams.tgWebAppData?.user })
                 })
-            }).then(resp => resp.json()).then(json => {
-                dispatch(updateCoins(json.item.coins));
-                if (json.item.inventory) {
-                    dispatch(updateInventory(json.item?.inventory))
-                    dispatch(updateHistory(json.item?.history))
-                }
-            })
-
-            // if (user.coins === -1)
-            //     fetch(`/api/users/user${launchParams.tgWebAppData?.user?.id}`)
-            //         .then(resp => resp.json())
-            //         .then(json => {
-            //             dispatch(updateCoins(json.coins));
-            //             if (json.inventory) {
-            //                 dispatch(updateInventory(json?.inventory))
-            //                 dispatch(updateHistory(json?.history))
-            //             }
-            //         })
+                    .then(resp => resp.json())
+                    .then(json => {
+                        dispatch(updateCoins(json.item.coins));
+                        if (json.item.inventory) {
+                            dispatch(updateInventory(json.item.inventory));
+                            dispatch(updateHistory(json.item.history));
+                        }
+                    });
+            }
         }
-
-
-
-
-    }, [dispatch, params.tgWebAppData.user.id, user.coins])
-
+    }, []);
 
     return (
         user.coins !== -1 ?

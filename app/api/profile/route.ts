@@ -9,11 +9,11 @@ import { NextResponse } from 'next/server';
 export async function POST(request: Request) {
     try {
         const { userData } = await request.json();
-        const usersSnapshot = await get(ref(db, `users/user${userData.id}`));
-        //const usersData: IUser = usersSnapshot.val();
+        const userRef = ref(db, `users/user${userData.id}`);
+        const snapshot = await get(userRef);
 
-        if (!usersSnapshot.exists()) {
-            await update(ref(db, `users/user${userData.id}`), {
+        if (!snapshot.exists()) {
+            await update(userRef, {
                 id: userData.id,
                 name: userData.first_name,
                 lastname: userData.last_name,
@@ -22,21 +22,26 @@ export async function POST(request: Request) {
                 inventory: [],
                 history: []
             });
+            return NextResponse.json({
+                success: true,
+                item: {
+                    id: userData.id,
+                    coins: 10000,
+                    inventory: [],
+                    history: []
+                }
+            });
         }
-
-        const userSnapshot = await get(ref(db, `users/user${userData.id}`));
 
         return NextResponse.json({
             success: true,
-            item: userSnapshot.val()
+            item: snapshot.val()
         });
 
-
-
     } catch (error) {
-        return Response.json({ error: `Database error: ${error}` }, { status: 500 });
+        return NextResponse.json(
+            { error: `Database error: ${error}` },
+            { status: 500 }
+        );
     }
 }
-
-
-

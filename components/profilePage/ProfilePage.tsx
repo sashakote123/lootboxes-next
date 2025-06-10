@@ -6,7 +6,7 @@ import Inventory from '../inventory/Inventory';
 import UserCard from '../userCard/UserCard';
 import styles from './styles.module.css'
 import { IUres } from '@/types/types';
-import { isTMA, retrieveRawInitData } from '@telegram-apps/sdk';
+import { isTMA, retrieveLaunchParams, retrieveRawInitData } from '@telegram-apps/sdk';
 
 
 const ProfilePage = () => {
@@ -21,7 +21,9 @@ const ProfilePage = () => {
 
         if (isTMA()) {
             const initDataRaw = retrieveRawInitData();
+            const launchParams = retrieveLaunchParams()
             console.log(initDataRaw);
+            console.log(launchParams);
             fetch('/api/protected', {
                 method: 'GET',
                 headers: {

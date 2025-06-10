@@ -6,33 +6,21 @@ import Inventory from '../inventory/Inventory';
 import UserCard from '../userCard/UserCard';
 import styles from './styles.module.css'
 import { IUres } from '@/types/types';
-import { isTMA, retrieveLaunchParams } from '@telegram-apps/sdk';
-import { mockLaunchParams } from '@/mock/launchParams';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
 
 
 const ProfilePage = () => {
 
     const [data, setData] = useState<IUres>()
-
+    const params = useSelector((state: RootState) => state.params)
     useEffect(() => {
-        const launchParams = isTMA() ? retrieveLaunchParams() : mockLaunchParams
 
-        // fetch('/api/profile', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify({
-        //         userData: launchParams.tgWebAppData?.user,
-        //     })
-        // })
-
-
-        fetch(`/api/users/user${launchParams.tgWebAppData?.user?.id}`)
+        fetch(`/api/users/user${params.tgWebAppData?.user?.id}`)
             .then(resp => resp.json())
             .then(json => { setData(json); console.log(json) })
 
-    }, [])
+    }, [params.tgWebAppData?.user?.id])
 
 
 

@@ -6,10 +6,9 @@ import { Swiper as SwiperType } from 'swiper/types';
 import 'swiper/css';
 import ItemImage from '../itemImage/ItemImage';
 import { IItem } from '@/types/types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { updateCoins, updateInventory } from '@/store/userSlice';
-import { isTMA, retrieveLaunchParams } from '@telegram-apps/sdk';
-import { mockLaunchParams } from '@/mock/launchParams';
+import { RootState } from '@/store/store';
 
 interface Props {
     itemsArray: IItem[],
@@ -17,9 +16,10 @@ interface Props {
 }
 
 const CaseAnimation = ({ itemsArray, setIsOpen }: Props) => {
-    const launchParams = isTMA() ? retrieveLaunchParams() : mockLaunchParams
     const dispatch = useDispatch()
     const swiperRef = useRef<SwiperType | null>(null);
+
+    const params = useSelector((state: RootState) => state.params)
 
     const onSwiper = (swiper: SwiperType) => {
         swiperRef.current = swiper
@@ -31,7 +31,7 @@ const CaseAnimation = ({ itemsArray, setIsOpen }: Props) => {
     }
 
     const tranSitionEnd = () => {
-        fetch(`/api/users/user${launchParams.tgWebAppData?.user?.id}`)
+        fetch(`/api/users/user${params.tgWebAppData?.user?.id}`)
             .then(resp => resp.json())
             .then(json => {
                 dispatch(updateCoins(json.coins))

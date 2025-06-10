@@ -6,9 +6,9 @@ export const mockLaunchParams = {
         "signature": "mrDhJ9YfyZQ47TDZavs3rcAVTm89f-PVEpn-iDwN_tXD6rhfEBtpiEga1oN26yPn8fEHTPKP8zYYpDRtLAoQCA",
         "user": {
             "allows_write_to_pm": true,
-            "first_name": "Alexander",
-            "id": 289134643,
-            "last_name": "Kotikhin",
+            "first_name": "Vasya",
+            "id": 12345678,
+            "last_name": "Pypkin",
             "language_code": "en",
             "photo_url": "https://t.me/i/userpic/320/2PteQg9JGixaWLl7YA8nmIH6dQyNPX1Ue25govlub3g.svg",
             "username": "alexKotikhin"

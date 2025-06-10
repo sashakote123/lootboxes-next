@@ -18,8 +18,8 @@ import { getNewId, getRandomItem } from '@/methods/methods';
 import 'swiper/css';
 
 import CaseAnimation from '../caseAnimation/CaseAnimation';
-import { isTMA, retrieveLaunchParams } from '@telegram-apps/sdk';
-import { mockLaunchParams } from '@/mock/launchParams';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
 
 interface Props {
     boxId: string;
@@ -34,6 +34,7 @@ const OpenCase: React.FC<Props> = ({ boxId }) => {
 
     const [alert, setAlert] = useState<boolean>(false)
 
+    const params = useSelector((state: RootState) => state.params)
 
     const showAlert = () => {
         setAlert(true);
@@ -49,14 +50,14 @@ const OpenCase: React.FC<Props> = ({ boxId }) => {
 
 
     const handleOpenCase = () => {
-        const launchParams = isTMA() ? retrieveLaunchParams() : mockLaunchParams
+
         fetch('/api/open-case', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                userId: `user${launchParams.tgWebAppData?.user?.id}`,
+                userId: `user${params.tgWebAppData?.user?.id}`,
                 caseId: boxId,
             }),
         }).then(resp => resp.json()).then(json => { setWinningItem(json.item) })

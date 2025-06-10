@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import { updateCoins, updateHistory, updateInventory } from '@/store/userSlice';
-import { isTMA, retrieveLaunchParams } from '@telegram-apps/sdk';
+// import { isTMA, retrieveLaunchParams } from '@telegram-apps/sdk';
 import { mockLaunchParams } from '@/mock/launchParams';
 import { updateParams } from '@/store/launchParamsSlice';
 import { ILaunchParams } from '@/types/types';

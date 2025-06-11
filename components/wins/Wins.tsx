@@ -14,7 +14,7 @@ const Wins = () => {
     const user = useSelector((state: RootState) => state.user)
 
 
-
+    console.log(user);
     return (
         <section className={styles.wins}>
             <h2 className={styles.winsTitle}>Последние выигрыши</h2>
@@ -23,11 +23,11 @@ const Wins = () => {
                 className={styles.winsList}
                 slidesPerView={4}
                 loop={false}>
-                {user.inventory ? user.inventory.map((item: IItem, index: number) => {
+                {user.inventory.map((item: IItem, index: number) => {
                     return <SwiperSlide key={index} className={styles.winsListItem}>
                         <ItemImage item={item} />
                     </SwiperSlide>
-                }).reverse(): <>no items yet</>}
+                }).reverse()}
             </Swiper>
 
         </section>

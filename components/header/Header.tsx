@@ -11,8 +11,8 @@ import { RootState } from '@/store/store';
 import { updateCoins, updateHistory, updateInventory } from '@/store/userSlice';
 import { isTMA, retrieveLaunchParams } from '@telegram-apps/sdk';
 import { mockLaunchParams } from '@/mock/launchParams';
-// import { updateParams } from '@/store/launchParamsSlice';
-// import { ILaunchParams } from '@/types/types';
+import { updateParams } from '@/store/launchParamsSlice';
+import { ILaunchParams } from '@/types/types';
 
 const Header = () => {
     //const [data, setData] = useState<IUres>()
@@ -21,36 +21,45 @@ const Header = () => {
     const user = useSelector((state: RootState) => state.user)
     const params = useSelector((state: RootState) => state.params)
     useEffect(() => {
+
         if (!params.tgWebAppData.user.id) {
-            //const launchParams = mockLaunchParams;
             const launchParams = isTMA() ? retrieveLaunchParams() : mockLaunchParams
-            // dispatch(updateParams(launchParams as ILaunchParams));
-            //dispatch(updateParams(mockLaunchParams as ILaunchParams));
-            // Добавьте проверку, чтобы не делать запрос при каждом изменении coins
-            if (user.coins === -1) {
-                fetch('/api/profile', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ userData: launchParams.tgWebAppData?.user })
+
+            dispatch(updateParams(launchParams as ILaunchParams))
+
+            fetch('/api/profile', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userData: launchParams.tgWebAppData?.user,
                 })
-                    //fetch('/api/user/user12345678')
-                    .then(resp => resp.json())
-                    .then(json => {
-                        console.log(json);
-                        // dispatch(updateCoins(json.coins));
-                        // if (json.inventory) {
-                        //     dispatch(updateInventory(json.inventory));
-                        //     dispatch(updateHistory(json.history));
-                        // }
-                        dispatch(updateCoins(json.item.coins));
-                        if (json.item.inventory) {
-                            dispatch(updateInventory(json.item.inventory));
-                            dispatch(updateHistory(json.item.history));
-                        }
-                    });
-            }
+            })
+                .then(resp => resp.json())
+                .then(json => {
+                    dispatch(updateCoins(json.item.coins));
+                    if (json.inventory) {
+                        dispatch(updateInventory(json?.item.inventory))
+                        dispatch(updateHistory(json?.item.history))
+                    }
+                })
         }
-    }, []);
+
+
+
+        // if (user.coins === -1)
+        //     fetch(`/api/users/user${launchParams.tgWebAppData?.user?.id}`)
+        //         .then(resp => resp.json())
+        //         .then(json => {
+        //             dispatch(updateCoins(json.coins));
+        //             if (json.inventory) {
+        //                 dispatch(updateInventory(json?.inventory))
+        //                 dispatch(updateHistory(json?.history))
+        //             }
+        //         })
+    }, [])
+
 
     return (
         user.coins !== -1 ?

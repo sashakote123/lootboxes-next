@@ -1,13 +1,13 @@
 
 
-import Navigation from "@/components/Navigation/Navigation";
+// import Navigation from "@/components/Navigation/Navigation";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import SFProDisplay from "./fonts";
 
 import './global.css'
-import Header from "@/components/header/Header";
-import ReduxProvider from "@/providers/ReduxProvider";
+// import Header from "@/components/header/Header";
+// import ReduxProvider from "@/providers/ReduxProvider";
 
 
 const geistSans = Geist({
@@ -37,11 +37,12 @@ export default function RootLayout() {
   return (
     <html lang="en" className={SFProDisplay.semibold.className} >
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <ReduxProvider>
+        <div>hello</div>
+        {/* <ReduxProvider>
           <Header />
-          {/* {children} */}
+          {children}
           <Navigation />
-        </ReduxProvider>
+        </ReduxProvider> */}
       </body>
     </html >
   );

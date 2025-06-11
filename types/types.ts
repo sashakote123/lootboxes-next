@@ -47,3 +47,14 @@ export interface ILaunchParams {
         }
     }
 }
+
+
+export interface IDailies {
+    image: string,
+    name: string,
+    description: string,
+
+    isComplete?: boolean,
+    reward?: number,
+    timer?: string
+}

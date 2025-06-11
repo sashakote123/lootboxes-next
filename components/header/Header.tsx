@@ -39,9 +39,9 @@ const Header = () => {
                 .then(resp => resp.json())
                 .then(json => {
                     dispatch(updateCoins(json.item.coins));
-                    if (json.inventory) {
-                        dispatch(updateInventory(json?.item.inventory))
-                        dispatch(updateHistory(json?.item.history))
+                    if (json.item.inventory) {
+                        dispatch(updateInventory(json.item.inventory))
+                        dispatch(updateHistory(json.item.history))
                     }
                 })
         }

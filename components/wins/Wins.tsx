@@ -12,7 +12,7 @@ import { RootState } from '@/store/store';
 const Wins = () => {
 
     const user = useSelector((state: RootState) => state.user)
-
+    
 
     console.log(user);
     return (

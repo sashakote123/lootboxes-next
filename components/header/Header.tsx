@@ -15,8 +15,6 @@ import { updateParams } from '@/store/launchParamsSlice';
 import { ILaunchParams } from '@/types/types';
 
 const Header = () => {
-    //const [data, setData] = useState<IUres>()
-
     const dispatch = useDispatch()
     const user = useSelector((state: RootState) => state.user)
     const params = useSelector((state: RootState) => state.params)
@@ -46,19 +44,7 @@ const Header = () => {
                 })
         }
 
-
-
-        // if (user.coins === -1)
-        //     fetch(`/api/users/user${launchParams.tgWebAppData?.user?.id}`)
-        //         .then(resp => resp.json())
-        //         .then(json => {
-        //             dispatch(updateCoins(json.coins));
-        //             if (json.inventory) {
-        //                 dispatch(updateInventory(json?.inventory))
-        //                 dispatch(updateHistory(json?.history))
-        //             }
-        //         })
-    }, [])
+    }, [dispatch, params.tgWebAppData.user.id])
 
 
     return (

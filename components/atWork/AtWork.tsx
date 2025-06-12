@@ -10,17 +10,20 @@ import SFProDisplay from '@/app/fonts';
 const AtWork = () => {
     return (
         <section className={styles.atWork}>
-            <div className={styles.image}>
-                <Image src={work} alt='work' />
+            <div className={styles.container}>
+                <div className={styles.image}>
+                    <Image src={work} alt='work' />
+                </div>
+                <h2 className={styles.title}>В разработке</h2>
+                <div className={`${SFProDisplay.regular.className} ${styles.subtitle}`}>Мы активно работаем над тестированием функций
+                    и введением новых разделов. Следите за обновлениями
+                    в нашем Телеграм-канале!</div>
+                <Link className={styles.linkBtn} href='/'>
+                    перейти
+                    <Image src={tg} alt='tg' />
+                </Link>
             </div>
-            <h2 className={styles.title}>В разработке</h2>
-            <div className={`${SFProDisplay.regular.className} ${styles.subtitle}`}>Мы активно работаем над тестированием функций
-                и введением новых разделов. Следите за обновлениями
-                в нашем Телеграм-канале!</div>
-            <Link className={styles.linkBtn} href='/'>
-                перейти
-                <Image src={tg} alt='tg' />
-            </Link>
+
         </section>
     );
 }

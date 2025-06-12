@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import { useRouter } from 'next/navigation';
 import { updateCoins } from '@/store/userSlice';
+import SFProDisplay from '@/app/fonts';
 
 
 interface Props {
@@ -21,7 +22,7 @@ const getDate = (date: number): string => {
     const hours = Math.floor(secondsLeft / 3600);
     const minutes = Math.floor((secondsLeft % 3600) / 60);
     const seconds = secondsLeft % 60;
-    return `${hours}:${minutes}:${seconds}`;
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 }
 
 const DailyItem: React.FC<Props> = ({ item, index }) => {
@@ -94,13 +95,13 @@ const DailyItem: React.FC<Props> = ({ item, index }) => {
         <div className={styles.item}>
             <Image width={200} height={200} className={styles.sliderImage} priority={false} src={item.image} alt='img' />
             <h4 className={styles.itemTitle}>{item.name}</h4>
-            <div className={styles.itemDesc}>{item.description}</div>
+            <div className={`${styles.itemDesc} ${SFProDisplay.regular.className}`}>{item.description}</div>
             {complete ? (
                 <button className={styles.itemBtn}>{timeLeft}</button>
             ) : (
                 <button onClick={() => completeTask(index + 1)} className={styles.itemBtnReward}>
-                    <div>+ {item.reward}</div>
-                    <Image src={fire} alt='reward' />
+                    <div>{typeof item.reward === "number" ? <>+</> : null} {item.reward}</div>
+                    {typeof item.reward === "number" ? <Image src={fire} alt='reward' /> : null}
                 </button>
             )}
         </div>

@@ -1,17 +1,14 @@
 
 
-.image {
-
-}
-
 .tokensPage {
     width: 353px;
     margin: 0 auto;
 
-
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    margin-bottom: 130px;
 }
 
 .pageTitle {

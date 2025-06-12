@@ -18,6 +18,7 @@ import CaseAnimation from '../caseAnimation/CaseAnimation';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import { useRouter } from 'next/navigation';
+import SFProDisplay from '@/app/fonts';
 
 
 
@@ -91,7 +92,7 @@ const OpenBonusCase = () => {
                         <div className={styles.casePicker}>
                             <Image quality={100} unoptimized={true} className={styles.img} width={186} height={186} src={data.img} alt='case' />
                         </div>
-                        <div className={styles.openBtns}>
+                        <div className={`${styles.openBtns}  ${SFProDisplay.bold.className}`}>
                             <div onClick={handleOpenCase} className={styles.btn}>
                                 открыть
                                 <div className={styles.price}>

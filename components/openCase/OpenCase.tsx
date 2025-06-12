@@ -20,6 +20,7 @@ import 'swiper/css';
 import CaseAnimation from '../caseAnimation/CaseAnimation';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
+import SFProDisplay from '@/app/fonts';
 
 interface Props {
     boxId: string;
@@ -101,7 +102,7 @@ const OpenCase: React.FC<Props> = ({ boxId }) => {
                             <Image quality={100} unoptimized={true} className={styles.img} width={186} height={186} src={data.img} alt='case' />
                             <Link href={`./box${getNewId(boxId, 4, true)}`} className={styles.arrowBtn}><Image src={left} alt='arrow' /></Link>
                         </div>
-                        <div className={styles.openBtns}>
+                        <div className={`${styles.openBtns}  ${SFProDisplay.bold.className}`}>
                             <div onClick={handleOpenCase} className={styles.btn}>
                                 открыть
                                 <div className={styles.price}>

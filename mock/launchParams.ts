@@ -7,7 +7,7 @@ export const mockLaunchParams = {
         "user": {
             "allows_write_to_pm": true,
             "first_name": "Vasya",
-            "id": 123456789,
+            "id": 12345678,
             "last_name": "Pypkin",
             "language_code": "en",
             "photo_url": "https://t.me/i/userpic/320/2PteQg9JGixaWLl7YA8nmIH6dQyNPX1Ue25govlub3g.svg",

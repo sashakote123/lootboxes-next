@@ -7,6 +7,7 @@ import Link from 'next/link';
 import cart from './../../sources/images/coins/shopping-cart.svg'
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
+import SFProDisplay from '@/app/fonts';
 
 const TokensPage = () => {
 
@@ -24,7 +25,7 @@ const TokensPage = () => {
 
                 <div className={styles.description}>
                     <div className={styles.descTitle}>Твой баланс</div>
-                    <div className={styles.descText}>Зарабатывай токены, выполняя задания от партнеров
+                    <div className={`${styles.descText}  ${SFProDisplay.regular.className}`}>Зарабатывай токены, выполняя задания от партнеров
                         и смотря короткие рекламные видео. Делись бонусной ссылкой с друзьями и получай дополнительную валюту.</div>
                 </div>
                 <Link href='/buyTotens' className={styles.buyBtn}>

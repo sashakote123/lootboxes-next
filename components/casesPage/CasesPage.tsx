@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import CasesBlock from '../casesBlock/CasesBlock';
 import Partners from '../partners/Partners';
 import styles from './styles.module.css'
+import SFProDisplay from '@/app/fonts';
 
 const CasesPage = () => {
 const [data, setData] = useState([]);
@@ -17,7 +18,7 @@ const [data, setData] = useState([]);
     return (
         <section className={styles.casesPage}>
             <h2 className={styles.title}>Кейсы</h2>
-            <h3 className={styles.subtitle}>Легко открывай в симуляторе сейчас — получай выгодные бонусы после полного запуска.</h3>
+            <h3 className={`${styles.subtitle} ${SFProDisplay.regular.className}`}>Легко открывай в симуляторе сейчас — получай выгодные бонусы после полного запуска.</h3>
             <div className={styles.cases}>
                 <CasesBlock casesArray={data} />
                 <Partners />

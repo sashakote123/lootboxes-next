@@ -13,6 +13,7 @@ import { isTMA, retrieveLaunchParams } from '@telegram-apps/sdk';
 import { mockLaunchParams } from '@/mock/launchParams';
 import { updateParams } from '@/store/launchParamsSlice';
 import { ILaunchParams } from '@/types/types';
+import SFProDisplay from '@/app/fonts';
 
 const Header = () => {
     const dispatch = useDispatch()
@@ -49,7 +50,7 @@ const Header = () => {
 
     return (
         user.coins !== -1 ?
-            <header className={styles.header}>
+            <header className={`${styles.header} ${SFProDisplay.semibold.className}`}>
                 <Link href='/coins' className={styles.coins}>
                     <Image src={fire} alt='fire' />
                     <div className={styles.text}>{user.coins}</div>

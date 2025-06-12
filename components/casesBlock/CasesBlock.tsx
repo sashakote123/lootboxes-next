@@ -28,7 +28,8 @@ const CasesBlock: React.FC<Props> = ({ casesArray }) => {
             spaceBetween={12}
             loop={false}>
             {casesArray.map((item: ICases, index: number) => {
-                return <SwiperSlide key={index} className={styles.winsListItem}>
+
+                return item.id === 5 ? null : <SwiperSlide key={index} className={styles.winsListItem}>
                     <div className={styles.image}>
                         <Image quality={100} unoptimized={true} priority={false} width={120} height={120} src={item.img} alt='img' />
                     </div>

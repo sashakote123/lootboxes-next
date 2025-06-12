@@ -3,7 +3,7 @@ import { ref, get, update } from "firebase/database";
 import { NextResponse } from 'next/server';
 
 
-export async function GET(request: Request, props: { params: Promise<{ userId: string, taskId: string }> }) {
+export async function POST(request: Request, props: { params: Promise<{ userId: string, taskId: string }> }) {
     const params = await props.params;
     try {
         const userId = String(params.userId);

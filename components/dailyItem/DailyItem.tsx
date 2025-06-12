@@ -7,6 +7,8 @@ import { IDailies } from '@/types/types';
 import { useEffect, useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
+import { useRouter } from 'next/navigation';
+
 
 interface Props {
     item: IDailies
@@ -29,11 +31,14 @@ const DailyItem: React.FC<Props> = ({ item, index }) => {
 
     const userId = useSelector((store: RootState) => store.params.tgWebAppData.user.id)
 
+    const router = useRouter()
+
+
     useEffect(() => {
         const checkExpiration = async () => {
             if (Date.now() >= timerRef.current.getTime() && complete && !hasExpiredRef.current) {
                 try {
-                    const response = await fetch(`/api/events/daily/usertasks/user${userId}/uncomplete/event${index + 1}`);
+                    const response = await fetch(`/api/events/daily/usertasks/user${userId}/uncomplete/event${index + 1}`, { method: 'POST' });
                     const json = await response.json();
                     setComplete(json.item.isComplete);
                     timerRef.current = new Date(json.item.timer);
@@ -54,12 +59,30 @@ const DailyItem: React.FC<Props> = ({ item, index }) => {
 
     const completeTask = async (taskId: number) => {
         try {
-            const response = await fetch(`/api/events/daily/usertasks/user${userId}/complete/event${taskId}`);
+            const response = await fetch(`/api/events/daily/usertasks/user${userId}/complete/event${taskId}`, { method: 'POST' });
             const json = await response.json();
             setComplete(json.item.isComplete);
             setTimeLeft('--:--:--');
             timerRef.current = new Date(json.item.timer);
             hasExpiredRef.current = false;
+
+            switch (item.type) {
+                case 'getReward':
+                    fetch(`${item.action}user${userId}`, { method: 'POST' })
+                        .then(resp => resp.json())
+                        .then(json => console.log(json))
+                    break;
+
+                case 'watchVideo':
+                    console.log('video');
+                    break;
+
+                case 'openBox':
+                    router.push('/open/bonusbox')
+                    break;
+            }
+
+
         } catch (error) {
             console.error('Error completing task:', error);
         }

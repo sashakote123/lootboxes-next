@@ -54,6 +54,9 @@ export interface IDailies {
     name: string,
     description: string,
 
+    type: string,
+    cooldown: number,
+    action?: string,
     isComplete?: boolean,
     reward?: number,
     timer?: string

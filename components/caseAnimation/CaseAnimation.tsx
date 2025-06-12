@@ -13,9 +13,10 @@ import { RootState } from '@/store/store';
 interface Props {
     itemsArray: IItem[],
     setIsOpen: Dispatch<SetStateAction<boolean>>,
+    onTransitionEnd?: () => void
 }
 
-const CaseAnimation = ({ itemsArray, setIsOpen }: Props) => {
+const CaseAnimation = ({ itemsArray, setIsOpen, onTransitionEnd }: Props) => {
     const dispatch = useDispatch()
     const swiperRef = useRef<SwiperType | null>(null);
 
@@ -40,6 +41,14 @@ const CaseAnimation = ({ itemsArray, setIsOpen }: Props) => {
         setTimeout(() => setIsOpen(false), 1500)
     }
 
+    const handleTransitionEnd = () => {
+        tranSitionEnd()
+
+        if (onTransitionEnd) {
+            onTransitionEnd()
+        }
+    }
+
     return (
         <section className={styles.animation}>
             <div className={styles.wrapper}></div>
@@ -49,7 +58,7 @@ const CaseAnimation = ({ itemsArray, setIsOpen }: Props) => {
                 centeredSlides
                 spaceBetween={10}
                 onSwiper={(swiper) => onSwiper(swiper)}
-                onSlideChangeTransitionEnd={tranSitionEnd}
+                onSlideChangeTransitionEnd={handleTransitionEnd}
                 initialSlide={0}
                 slidesPerView={5}>
                 {itemsArray.map((item: IItem, index: number) => {

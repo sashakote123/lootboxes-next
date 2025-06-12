@@ -5,9 +5,10 @@ import Image from 'next/image';
 import fire from './../../sources/images/mainPage/firelight.svg'
 import { IDailies } from '@/types/types';
 import { useEffect, useState, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import { useRouter } from 'next/navigation';
+import { updateCoins } from '@/store/userSlice';
 
 
 interface Props {
@@ -33,6 +34,7 @@ const DailyItem: React.FC<Props> = ({ item, index }) => {
 
     const router = useRouter()
 
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const checkExpiration = async () => {
@@ -70,7 +72,7 @@ const DailyItem: React.FC<Props> = ({ item, index }) => {
                 case 'getReward':
                     fetch(`${item.action}user${userId}`, { method: 'POST' })
                         .then(resp => resp.json())
-                        .then(json => console.log(json))
+                        .then(json => dispatch(updateCoins(json.item.coins)))
                     break;
 
                 case 'watchVideo':
@@ -78,7 +80,7 @@ const DailyItem: React.FC<Props> = ({ item, index }) => {
                     break;
 
                 case 'openBox':
-                    router.push('/open/bonusbox')
+                    router.push('openbonus')
                     break;
             }
 

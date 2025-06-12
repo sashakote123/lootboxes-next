@@ -23,7 +23,10 @@ export async function POST(request: Request, props: { params: Promise<{ userId: 
 
         return NextResponse.json({
             success: true,
-            item: userSnapshot.val()
+            item: {
+                ...userSnapshot.val(),
+                coins: userSnapshot.val().coins + eventSnapshot.val().reward,
+            }
 
         });
     } catch (error) {

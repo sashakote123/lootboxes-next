@@ -156,3 +156,8 @@
     top: 50%;
     transform: translateY(-50%);
 }
+
+.notEnought {
+    cursor: default;
+    opacity: 0.5;
+}

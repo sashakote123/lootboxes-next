@@ -30,8 +30,8 @@ const rarityImages = {
 const ItemImage: React.FC<Props> = ({ item, width=79, height=79 }) => {
     return (
         <div className={styles.image}>
-            <Image quality={100} className={styles.rarity} width={width} height={height} src={rarityImages[item.rarity]} alt='rare' />
-            <Image quality={100} unoptimized={true} priority={false} className={styles.item} width={width} height={height} src={item.image} alt='img' />
+            <Image priority quality={100} className={styles.rarity} width={width} height={height} src={rarityImages[item.rarity]} alt='rare' />
+            <Image priority={false} quality={100} unoptimized={true} className={styles.item} width={width} height={height} src={item.image} alt='img' />
         </div>
 
     );

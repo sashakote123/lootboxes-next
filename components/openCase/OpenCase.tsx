@@ -36,6 +36,7 @@ const OpenCase: React.FC<Props> = ({ boxId }) => {
     const [alert, setAlert] = useState<boolean>(false)
 
     const params = useSelector((state: RootState) => state.params)
+    const userCoins = useSelector((state: RootState) => state.user.coins)
 
     const showAlert = () => {
         setAlert(true);
@@ -102,8 +103,8 @@ const OpenCase: React.FC<Props> = ({ boxId }) => {
                             <Image quality={100} unoptimized={true} className={styles.img} width={186} height={186} src={data.img} alt='case' />
                             <Link href={`./box${getNewId(boxId, 4, true)}`} className={styles.arrowBtn}><Image src={left} alt='arrow' /></Link>
                         </div>
-                        <div className={`${styles.openBtns}  ${SFProDisplay.bold.className}`}>
-                            <div onClick={handleOpenCase} className={styles.btn}>
+                        <div className={`${styles.openBtns}  ${SFProDisplay.bold.className} ${data.price * currentCount > userCoins ? styles.notEnought : null}`}>
+                            <div onClick={data.price * currentCount > userCoins ? () => { } : handleOpenCase} className={styles.btn}>
                                 открыть
                                 <div className={styles.price}>
                                     {data.price * currentCount}

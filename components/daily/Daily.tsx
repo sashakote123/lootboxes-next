@@ -8,22 +8,22 @@ import 'swiper/css';
 import { useEffect, useState } from 'react'
 import DailyItem from '../dailyItem/DailyItem'
 import { IDailies } from '@/types/types'
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
 
 
 
 
 const Daily = () => {
     const [events, setEvents] = useState<IDailies[]>()
-
+    const userId = useSelector((store: RootState) => store.params.tgWebAppData.user.id)
 
     useEffect(() => {
-        // fetch('/api/events/daily/usertasks/user12345678/complete/event1')
 
-
-        fetch('/api/events/daily/usertasks/user12345678')
+        fetch(`/api/events/daily/usertasks/user${userId}`)
             .then(resp => resp.json())
-            .then(json => { console.log(json); setEvents(Object.values(json)) })
-    }, [])
+            .then(json => {setEvents(Object.values(json)) })
+    }, [userId])
 
 
     return (
@@ -35,7 +35,7 @@ const Daily = () => {
                 {events ? events.map((item: IDailies, index: number) => {
                     return (
                         <SwiperSlide key={index} >
-                            <DailyItem  item={item} index={index} />
+                            <DailyItem item={item} index={index} />
                         </SwiperSlide>
 
                     )

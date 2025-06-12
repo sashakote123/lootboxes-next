@@ -31,9 +31,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
-  // export default function RootLayout() {
-
-
   return (
     <html lang="en" className={SFProDisplay.semibold.className} >
       <body className={`${geistSans.variable} ${geistMono.variable}`}>

@@ -13,8 +13,6 @@ const Wins = () => {
 
     const user = useSelector((state: RootState) => state.user)
     
-
-    console.log(user);
     return (
         <section className={styles.wins}>
             <h2 className={styles.winsTitle}>Последние выигрыши</h2>

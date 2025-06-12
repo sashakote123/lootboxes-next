@@ -21,7 +21,6 @@ import localFont from 'next/font/local'
 // };
 
 
-// Для каждого начертания создаем отдельную константу
 const sfProDisplayRegular = localFont({
       src: './../sources/fonts/SF-Pro-Display-Regular.otf',
   weight: '400',
@@ -43,12 +42,10 @@ const sfProDisplayBold = localFont({
     display: 'swap',
 });
 
-// Экспортируем объект с шрифтами
 export const SFProDisplay = {
     regular: sfProDisplayRegular,
     semibold: sfProDisplaySemiBold,
     bold: sfProDisplayBold,
-    // Добавьте другие начертания по аналогии
 };
 
 export default SFProDisplay;

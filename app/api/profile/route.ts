@@ -2,9 +2,6 @@ import { db } from '@/lib/firebase';
 import { ref, get, update } from "firebase/database";
 import { NextResponse } from 'next/server';
 
-// interface IUser {
-//     id: number
-// }
 
 export async function POST(request: Request) {
     try {

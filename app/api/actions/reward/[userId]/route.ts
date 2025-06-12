@@ -7,9 +7,6 @@ export async function POST(request: Request, props: { params: Promise<{ userId: 
     const params = await props.params;
     try {
         const userId = String(params.userId);
-
-        //const userRef = ref(db, `users/${userId}/events/daily`);
-        //const userSnapshot = await get(userRef);
         const eventSnapshot = await get(ref(db, `events/daily/event3`));
         const userRef = ref(db, `users/${userId}/`)
         const userSnapshot = await get(userRef);

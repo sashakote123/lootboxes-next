@@ -18,7 +18,7 @@ const ProfilePage = () => {
 
         fetch(`/api/user/user${params.tgWebAppData?.user?.id}`)
             .then(resp => resp.json())
-            .then(json => { setData(json); console.log(json) })
+            .then(json => { setData(json) })
 
     }, [params.tgWebAppData?.user?.id])
 

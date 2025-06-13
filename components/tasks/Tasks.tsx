@@ -1,70 +1,61 @@
-import Image, { StaticImageData } from 'next/image';
+'use client'
 import styles from './styles.module.css'
 
-import tg from './../../sources/images/mainPage/tglight.svg'
-import social from './../../sources/images/mainPage/social.svg'
-import arrow from './../../sources/images/mainPage/arrowDark.svg'
-import ok from './../../sources/images/mainPage/okdark.svg'
 
-import fire from './../../sources/images/mainPage/fireblue.svg'
 
-interface ITasks {
-    img: StaticImageData,
-    title: string,
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
+import { ITasks } from '@/types/types';
+import TaskItem from '../taskItem/TaskItem';
 
-    isComplete: boolean,
-    reward: number,
-}
 
-const tasks: ITasks[] = [
-    {
-        img: tg,
-        title: 'Подпишись на Телеграм-канал',
-        isComplete: true,
-        reward: 200,
-    },
-    {
-        img: social,
-        title: 'Пригласи в игру друга — Вдвоем всегда веселее!',
-        isComplete: false,
-        reward: 100,
-    },
-    {
-        img: tg,
-        title: 'Подпишись на Телеграм-канал партнёров',
-        isComplete: false,
-        reward: 200,
-    },
-]
+
+// const tasks: ITasks[] = [
+//     {
+//         img: tg,
+//         title: 'Подпишись на Телеграм-канал',
+//         isComplete: true,
+//         reward: 200,
+//     },
+//     {
+//         img: social,
+//         title: 'Пригласи в игру друга — Вдвоем всегда веселее!',
+//         isComplete: false,
+//         reward: 100,
+//     },
+//     {
+//         img: tg,
+//         title: 'Подпишись на Телеграм-канал партнёров',
+//         isComplete: false,
+//         reward: 200,
+//     },
+// ]
+
+
 
 
 const Tasks = () => {
+    const [tasks, setTasks] = useState<ITasks[]>()
+    const userId = useSelector((store: RootState) => store.params.tgWebAppData.user.id)
+
+
+    useEffect(() => {
+        fetch(`/api/events/tasks/usertasks/user${userId}`)
+            .then(resp => resp.json())
+            .then(json => { setTasks(Object.values(json)) })
+    }, [userId])
+
+
+
+
     return (
         <section className={styles.tasks}>
-            <h2 className={styles.title}>Задания <span>(2)</span></h2>
+            <h2 className={styles.title}>Задания <span>({tasks? tasks.length : <>...</>})</span></h2>
             <ul className={styles.tasksList}>
-                {tasks.map((item: ITasks, index: number) => {
-                    return <li key={index} className={styles.task}>
-                        <div className={styles.taskImage}>
-                            <Image src={item.img} alt='image' />
-                        </div>
-                        <div className={styles.taskInfo}>
-                            <div className={styles.infoTitle}>{item.title}</div>
-                            <div className={styles.infoReward}>
-                                +{item.reward}
-                                <Image src={fire} alt='image' />
-                            </div>
-                        </div>
-                        {item.isComplete ? <div className={styles.completed}>
-                            <Image src={ok} alt='image' />
-                        </div> :
-                            <button className={styles.completeBtn}>
-                                <Image src={arrow} alt='image' />
-                            </button>}
-
-
-                    </li>
-                })}
+                {tasks ? tasks.map((item: ITasks, index: number) => {
+                    return <TaskItem key={index} item={item} index={index} />
+                }) : <div>loading...</div>}
 
             </ul>
         </section>

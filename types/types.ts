@@ -61,3 +61,12 @@ export interface IDailies {
     reward?: number | string,
     timer?: string
 }
+
+
+export interface ITasks {
+    img: string,
+    title: string,
+
+    isComplete: boolean,
+    reward: number,
+}

@@ -3,7 +3,7 @@ import { ref, get } from "firebase/database";
 import { NextResponse } from 'next/server';
 
 
-export async function GET(props: { params: Promise<{ taskId: string, userId: string }> }) {
+export async function GET(request: Request, props: { params: Promise<{ taskId: string, userId: string }> }) {
     const params = await props.params;
     try {
         const userId = String(params.userId);
